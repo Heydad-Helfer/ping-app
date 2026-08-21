@@ -338,6 +338,76 @@ html.light {
   margin-inline: auto;
 }
 
+@utility surface-glass {
+  background-color: var(--nav-surface);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+}
+
+@utility app-layout {
+  @apply page-shell flex flex-col gap-gutter;
+}
+
+@utility app-layout-content {
+  @apply page-content flex min-h-0 flex-1 flex-col gap-gutter;
+}
+
+@utility app-main {
+  @apply flex min-h-0 flex-1 flex-col;
+}
+
+@utility app-header {
+  @apply surface-glass sticky top-0 z-40 border-b border-outline-variant/40;
+}
+
+@utility app-header-bar {
+  @apply flex h-14 items-center gap-3;
+}
+
+@utility app-header-brand {
+  @apply flex shrink-0 items-center gap-2 text-foreground no-underline;
+}
+
+@utility app-header-brand-mark {
+  @apply size-7 rounded-sm;
+}
+
+@utility app-header-brand-name {
+  @apply font-heading text-headline-sm tracking-tight;
+}
+
+@utility app-header-nav {
+  @apply mx-auto hidden min-w-0 flex-1 items-center justify-center gap-1 sm:flex;
+}
+
+@utility app-header-nav-link {
+  @apply inline-flex h-touch items-center px-3 text-label-md text-muted-foreground transition-colors hover:text-foreground;
+}
+
+@utility app-header-nav-link-mock {
+  @apply pointer-events-none opacity-60;
+}
+
+@utility app-header-actions {
+  @apply ms-auto flex shrink-0 items-center gap-1 sm:ms-0;
+}
+
+@utility home-section {
+  @apply flex flex-1 flex-col justify-center gap-4 py-8;
+}
+
+@utility home-title {
+  @apply font-heading text-headline-lg text-foreground;
+}
+
+@utility home-body {
+  @apply max-w-prose text-body-lg text-muted-foreground;
+}
+
+@utility home-placeholder {
+  @apply text-body-sm text-muted-foreground;
+}
+
 @utility app-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -350,12 +420,6 @@ html.light {
   @media (min-width: 64rem) {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
-}
-
-@utility surface-glass {
-  background-color: var(--nav-surface);
-  backdrop-filter: blur(var(--nav-blur));
-  -webkit-backdrop-filter: blur(var(--nav-blur));
 }
 
 @layer base {
