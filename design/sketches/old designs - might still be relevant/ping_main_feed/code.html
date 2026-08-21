@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Ping - Main Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#1b1b1b",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "on-surface": "#1b1b1b",
+                        "primary-fixed": "#e2e2e2",
+                        "on-primary-container": "#848484",
+                        "tertiary": "#000000",
+                        "on-tertiary-container": "#848484",
+                        "surface-container": "#eeeeee",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed-variant": "#474747",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#1b1b1b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "inverse-surface": "#303030",
+                        "inverse-on-surface": "#f1f1f1",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary": "#505f76",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4c4546",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9f9",
+                        "primary": "#000000",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-primary-fixed": "#1b1b1b",
+                        "outline": "#7e7576",
+                        "on-secondary-container": "#54647a",
+                        "outline-variant": "#cfc4c5",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#d0e1fb",
+                        "on-background": "#1b1b1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-primary": "#c6c6c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "safe-bottom": "env(safe-area-inset-bottom, 24px)",
+                        "md": "16px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-safe-bottom flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-tertiary docked full-width top-0 sticky z-50 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center w-full px-md h-12 md:h-16">
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:bg-surface-container-high transition-colors flex-shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A minimalist avatar portrait of a user in a clean, modern aesthetic. Soft lighting, neutral background, sharp focus on the face. High contrast, simple composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASwswpt-Hj8A4AwY0holrnOY_p4bNwIUc_-o7Eo6uzKyIzHVgKCQhfLp79PiRr48vgIK5rRpKfmvBNaR28XAiV-RPd6y1PdT9UIwUQoY4Sjon1OIQM3CBCAaIiXOzHd4sHwlcidSVtw34fKyBKrYf_-zedekgUCTXSwDVFtb2hL8jAaF8pfXtVYhgT1B5zR55uKUnr5vR7ty_jNI_ROtaFwv7DiG_Kq8jCSka2AI9QwJQYQbKexaEhAA"/>
+</button>
+<h1 class="font-headline-lg text-[24px] md:font-headline-lg md:text-headline-lg text-primary dark:text-primary-fixed tracking-tight">Ping</h1>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Toggle Theme" class="text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full p-2">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+</button>
+<button class="font-label-md text-label-md text-primary font-bold hover:bg-surface-container-high px-2 py-1 rounded transition-colors">
+                HE/EN
+            </button>
+</div>
+</header>
+<!-- Sticky Filter Bar -->
+<div class="sticky top-[48px] md:top-[64px] z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant py-sm px-md">
+<div class="flex overflow-x-auto no-scrollbar gap-sm items-center py-1">
+<button class="flex-shrink-0 bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full border border-primary">
+                All Notes
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-container transition-colors">
+                My Private Notes
+            </button>
+<button class="flex-shrink-0 bg-error/10 text-error font-label-md text-label-md px-4 py-2 rounded-full border border-error/20 hover:bg-error/20 transition-colors">
+                Urgent
+            </button>
+<button class="flex-shrink-0 bg-secondary-container/30 text-on-secondary-container font-label-md text-label-md px-4 py-2 rounded-full border border-secondary-container hover:bg-secondary-container/50 transition-colors">
+                Idea
+            </button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface-variant font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors">
+                Routine
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-container transition-colors">
+                Groceries
+            </button>
+</div>
+</div>
+<!-- Main Content: Feed -->
+<main class="flex-1 px-md py-lg max-w-2xl mx-auto w-full flex flex-col gap-3">
+<!-- Card 1: Routine / Groceries -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover border border-outline-variant" data-alt="A close up minimalist avatar of a user. Clean lighting, neutral backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJAJovzBslWs1Y1IrEIfuxSsAU1lrqDvR8szULSmFcei3xMU8eCc7_VCjuaBBbwZbOEH8CkKk-5z_RydK6DczeYXNyLDRhRkrsKixNgVF6kg9a-VqOOtucEn7m7rIoEfMRgZmt7dLoI7TK5ueJJXyRMKOve3ccU58mLg1kV3YvociW203O2hiEOxOOrX6ls1rShGP5TPr40XDJjFQFJ0ihWM4H_plvRdTyBPD2KftuuTg8pxuC5IA43g"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Me • Today</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface">Buy milk and eggs</p>
+<div class="flex flex-wrap gap-2 mt-xs">
+<span class="font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2 py-1 rounded-full">Routine</span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface border border-outline-variant px-2 py-1 rounded-full">Groceries</span>
+</div>
+</article>
+<!-- Card 2: Urgent / Home -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover border border-outline-variant" data-alt="A close up minimalist avatar of a partner user. Warm lighting, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZTFHmrVMqK3EutSdJCxcE8xUFBKscdgOhuvoP8OdwkY9leDx213eYB8Toqk6XBYU9E77vxLuS_6urK058rLR5lv-oedG8Zx__SroTntYFVq2liLAKqoBeUFD67JLdJD1rDewrUlRtQLLRZEkI3d3rzUsTbKJ3XxsRCH5gzYT4y31jsFSF0kdixiSEWNs8xnLLoulk8FIU65Mo1aotEVMk0-ivUwM7Pfs5wX-mIyUZRZ7yuAsswJ-EzQ"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Partner • Tomorrow</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface">Fix the leaky faucet in the bathroom</p>
+<div class="flex flex-wrap gap-2 mt-xs">
+<span class="font-label-sm text-label-sm bg-error/10 text-error px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span> Urgent
+                </span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface border border-outline-variant px-2 py-1 rounded-full">Home</span>
+</div>
+</article>
+<!-- Card 3: Idea / Travel -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<img alt="Author Avatar" class="w-6 h-6 rounded-full object-cover border border-outline-variant" data-alt="A close up minimalist avatar of a user. Clean lighting, neutral backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAtQwhpxg2SdMc_UgZRGOdSU2QnmHI58N38aGr0V16DTKSKjifPtSCY-qRFosDZhonpht81TwQ9FA_0kdJ5l_lc2QY8wSjmQ7PDz0lhZcQDvIDdVeE6wzWqp-5RiBhXYDOQtEP7cRN9PR-rtFXk6Kd9SE3sof1mKEsN516B5upV8cAzGrcKEJOMSJMgFBBV3wICgwzfeW0kWVbaj_HQZvGfejjww0JQsK-BS7LQLgiGHlJqUNIxH2xRA"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Me</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface">Idea for summer vacation: Portugal?</p>
+<div class="flex flex-wrap gap-2 mt-xs">
+<span class="font-label-sm text-label-sm bg-secondary-container/30 text-on-secondary-container border border-secondary-container/50 px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span> Idea
+                </span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface border border-outline-variant px-2 py-1 rounded-full">Travel</span>
+</div>
+</article>
+<!-- Bottom padding for FAB and Nav -->
+<div class="h-24"></div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button aria-label="Create Note" class="fixed bottom-[80px] md:bottom-lg end-md z-50 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe-bottom border-t border-outline-variant dark:border-outline flat no shadows flex justify-around items-center h-16 px-lg bg-surface dark:bg-tertiary">
+<button aria-label="Home" class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full w-12 h-12 Active: scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+</button>
+<button aria-label="Search" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-tertiary-fixed-dim w-12 h-12 hover:text-primary dark:hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button aria-label="Notifications" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-tertiary-fixed-dim w-12 h-12 hover:text-primary dark:hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Settings" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-tertiary-fixed-dim w-12 h-12 hover:text-primary dark:hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</nav>
+</body></html>

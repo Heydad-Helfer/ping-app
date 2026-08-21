@@ -11,8 +11,8 @@ import { AppLayout } from "#/components/layout/app-layout";
 import { PreferencesProvider } from "#/components/preferences-provider";
 import ClerkProvider from "#/integrations/clerk/provider";
 import { htmlClassForTheme, type PreferencesState } from "#/lib/preferences";
-import { getPreferencesForClientNav } from "#/lib/preferences-cache";
 import { getPreferencesServerFn } from "#/lib/preferences.functions";
+import { getPreferencesForClientNav } from "#/lib/preferences-cache";
 
 import appCss from "../styles.css?url";
 

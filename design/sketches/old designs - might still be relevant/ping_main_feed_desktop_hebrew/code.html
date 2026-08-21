@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="he"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ping - Main Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "primary-container": "#1b1b1b",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "surface-dim": "#dadada",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1b1b1b",
+                        "tertiary-container": "#1b1b1b",
+                        "on-primary-container": "#848484",
+                        "tertiary-fixed": "#e2e2e2",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e2e2e2",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-container-low": "#f3f3f3",
+                        "primary": "#000000",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "on-primary-fixed": "#1b1b1b",
+                        "secondary-fixed": "#d3e4fe",
+                        "outline": "#7e7576",
+                        "primary-fixed": "#e2e2e2",
+                        "secondary": "#505f76",
+                        "on-surface-variant": "#4c4546",
+                        "outline-variant": "#cfc4c5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#303030",
+                        "secondary-container": "#d0e1fb",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#474747",
+                        "inverse-primary": "#c6c6c6",
+                        "on-background": "#1b1b1b",
+                        "on-tertiary-container": "#848484",
+                        "surface-tint": "#5e5e5e",
+                        "background": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "safe-bottom": "env(safe-area-inset-bottom, 24px)",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased flex flex-col items-center">
+<!-- TopAppBar from JSON -->
+<header class="w-full max-w-4xl bg-surface dark:bg-tertiary font-headline-sm text-headline-sm md:font-headline-md md:text-headline-md docked full-width top-0 sticky z-50 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-md h-12 md:h-16">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-outline-variant">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A close-up, highly detailed portrait of a modern user in a sleek, minimalist environment. Soft, high-key lighting illuminates the face, emphasizing clean lines and a utilitarian aesthetic. The background is a stark, pure white, contrasting with the subtle warm tones of the subject. A sense of focused calm is conveyed, fitting a productivity app context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8TH4SacQP75RpzrvzYqGLO6eTEYexeYuwy76SkVrWVo5t63W2bwDOEoq050Jqw_9FUwfLHOc8kthiHIkEQUp4pyhi6-Hgd6_ASFNBwit3URiF3ZBQCs3TeYLCzJsQ6TkhTyWLDftL3DfBC33erWhXgoJCx0e35qIpROWriGYutLSDGEeekOYzCMo674ImrVNpxcZQKtRNAY8e-gfBWvMktmlT_oO3JvX3url5HFm8cf9fgs9WMro2Vg"/>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed tracking-tight">Ping</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant dark:text-on-tertiary-container hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors w-10 h-10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="text-on-surface-variant dark:text-on-tertiary-container hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant">HE/EN</button>
+</div>
+</header>
+<main class="w-full max-w-4xl flex-grow px-md py-lg flex flex-col gap-lg">
+<!-- Filter Bar -->
+<nav class="flex gap-sm overflow-x-auto pb-2 scrollbar-hide">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full whitespace-nowrap">הפתקים שלי</button>
+<button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant whitespace-nowrap">דחוף</button>
+<button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant whitespace-nowrap">רעיון</button>
+<button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant whitespace-nowrap">שגרתי</button>
+</nav>
+<!-- Feed Content -->
+<section class="flex flex-col gap-md">
+<!-- Note Card 1 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm">
+<header class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img alt="Author" class="w-full h-full object-cover" data-alt="A detailed, modern avatar portrait of an individual in a bright, minimalist setting. High contrast, sharp focus, capturing a professional yet approachable demeanor. The background is a clean, neutral gray, enhancing the utilitarian feel of the interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3g1xenbpnK1EtGT3ihQ_Lp6WXbBkvCpnFr1G5p0I5SpZRFLvsyIR5hcmW9uy-JAvLAEQkhi6OUWKmjWVEhYoJdQBcCKrk-dagYbiiaeArKFh4c_OgSlTIpCtB3EXMEMSbMGOT-F-VIxFcQx9tfyqb-hJ-Nes76WWmLeaq5QNHDy8vsGybWZka-uYyIiYlPrPYbN6DuUWWVDHd9WhqHI_qvzV4y19vhdJH8gXtALzL3YHf5RryeJ9GNw"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">יוסי לוי</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">לפני שעתיים</p>
+</div>
+</div>
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-1 rounded-full">דחוף</span>
+</header>
+<div class="font-body-md text-body-md text-on-surface">
+                    צריך לזכור לקנות חלב ולחם בדרך הביתה. אל תשכחו גם את הדואר!
+                </div>
+<footer class="flex gap-2 mt-sm">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-1 rounded-full opacity-80">#קניות</span>
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-1 rounded-full opacity-80">#בית</span>
+</footer>
+</article>
+<!-- Note Card 2 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm">
+<header class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img alt="Author" class="w-full h-full object-cover" data-alt="A polished, minimalist portrait of a woman looking thoughtfully off-camera. The lighting is soft and diffuse, creating a serene mood. Set against a pure white background, embodying a clean, highly structured design system aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg4tzU2n2CqChyf_yerSKY6C3OvUj7aRcqNS-SXWPxz0VF2vVeR5SMvGnkNXXPkMI1IRFw6uiIapyZnVmFOd4Ft8uAM54olixbF73uLdn_a4Qcf-VU_n4TKORDtjpKz56TZssTpqO_RwHc-twrDmZT0ije2jv4bjy9CRaPSs1njBpLM6eEKKwq5iPYnWrTx2LniuIMQmbBAqTGGmtL9twvx0-q7YfkcG5dq24AG7Gts0yKGzAKIhBYew"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">מיכל כהן</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">אתמול, 14:30</p>
+</div>
+</div>
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-full border border-outline-variant">רעיון</span>
+</header>
+<div class="font-body-md text-body-md text-on-surface">
+                    אולי כדאי לארגן ישיבת צוות ביום חמישי הקרוב לדון בפרויקט החדש.
+                </div>
+</article>
+<!-- Note Card 3 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm">
+<header class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img alt="Author" class="w-full h-full object-cover" data-alt="A sleek, modern headshot of a person wearing minimal clothing, captured with sharp clarity. The background is a deep, dark gray, offering high contrast and a slightly moody, yet professional atmosphere suitable for a tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOOumH6coHkqJ4E96EUN9gIUvtpun-atn2eZSA9OiCbSt-750FuTj-OqUlVGPopCW8HTtj1q6mRz_g1Z-y7wz6m9D_L9sTug-luA0Yd0oO1KcNUCQZ3IgVL2hGNWo-EMfMEiZJ8uaO7RWG1h4VDRTMQPL1Y-zcbGzxGW7qso8WqJjxOmP5QJFvbUaWBKBS7XvcZjgCPfcDg0_U4pxMam9nxQuc9nV3FgSv9ht1hp-GY2ix21U1NX3SZg"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">דוד ישראלי</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">25 אוק׳ 2023</p>
+</div>
+</div>
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-full border border-outline-variant">שגרתי</span>
+</header>
+<div class="font-body-md text-body-md text-on-surface">
+                   עדכון שבועי: כל המשימות הושלמו בהצלחה. ממתין לאישור.
+                </div>
+</article>
+</section>
+</main>
+<!-- Floating Action Button (FAB) - Bottom-Left for RTL -->
+<button class="fixed bottom-safe-bottom start-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</body></html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Add Note Drawer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#1b1b1b",
+                      "tertiary-fixed-dim": "#c6c6c6",
+                      "on-surface": "#1b1b1b",
+                      "primary-fixed": "#e2e2e2",
+                      "on-primary-container": "#848484",
+                      "tertiary": "#000000",
+                      "on-tertiary-container": "#848484",
+                      "surface-container": "#eeeeee",
+                      "surface-container-high": "#e8e8e8",
+                      "surface": "#f9f9f9",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary-fixed": "#0b1c30",
+                      "on-primary-fixed-variant": "#474747",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#1b1b1b",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "inverse-surface": "#303030",
+                      "inverse-on-surface": "#f1f1f1",
+                      "tertiary-fixed": "#e2e2e2",
+                      "secondary": "#505f76",
+                      "primary-fixed-dim": "#c6c6c6",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#4c4546",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#dadada",
+                      "error-container": "#ffdad6",
+                      "background": "#f9f9f9",
+                      "primary": "#000000",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#1b1b1b",
+                      "surface-tint": "#5e5e5e",
+                      "on-primary-fixed": "#1b1b1b",
+                      "outline": "#7e7576",
+                      "on-secondary-container": "#54647a",
+                      "outline-variant": "#cfc4c5",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#d0e1fb",
+                      "on-background": "#1b1b1b",
+                      "surface-container-highest": "#e2e2e2",
+                      "surface-container-low": "#f3f3f3",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "inverse-primary": "#c6c6c6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "safe-bottom": "env(safe-area-inset-bottom, 24px)",
+                      "md": "16px",
+                      "lg": "24px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-full overflow-hidden font-body-md antialiased" dir="ltr">
+<!-- Mock Background Content to show overlay effect -->
+<div class="h-full w-full p-md md:p-lg blur-[2px] opacity-60">
+<header class="flex justify-between items-center mb-lg">
+<h1 class="font-headline-lg text-headline-lg">Dashboard</h1>
+</header>
+<div class="space-y-sm">
+<div class="h-24 bg-surface-container rounded-lg border border-outline-variant"></div>
+<div class="h-24 bg-surface-container rounded-lg border border-outline-variant"></div>
+<div class="h-24 bg-surface-container rounded-lg border border-outline-variant"></div>
+</div>
+</div>
+<!-- Backdrop Overlay -->
+<div aria-hidden="true" class="fixed inset-0 bg-tertiary/40 backdrop-blur-md z-40 transition-opacity"></div>
+<!-- Bottom Sheet Drawer -->
+<div class="fixed inset-x-0 bottom-0 z-50 transform transition-transform duration-300 ease-out flex justify-center md:items-end">
+<div class="w-full max-w-2xl bg-surface rounded-t-[24px] md:rounded-[24px] md:mb-lg shadow-[0px_10px_30px_rgba(0,0,0,0.05)] border border-outline-variant pb-safe-bottom flex flex-col max-h-[795px]">
+<!-- Grab Handle (Mobile) -->
+<div class="w-full flex justify-center pt-sm pb-xs md:hidden">
+<div class="w-8 h-1 bg-outline-variant rounded-full"></div>
+</div>
+<!-- Header -->
+<div class="px-md md:px-lg py-md flex justify-between items-center border-b border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">New Note</h2>
+<button aria-label="Close drawer" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+<!-- Content Scroll Area -->
+<div class="flex-1 overflow-y-auto px-md md:px-lg py-md space-y-lg">
+<!-- Textarea -->
+<div>
+<label class="sr-only" for="note-content">Note Details</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none h-32" id="note-content" placeholder="What's on your mind?" rows="4"></textarea>
+</div>
+<!-- Priority Segmented Control -->
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant mb-sm">Priority</span>
+<div class="flex bg-surface-container rounded-lg p-1 border border-outline-variant">
+<button class="flex-1 py-2 font-label-md text-label-md text-on-surface-variant rounded-md hover:bg-surface-variant transition-colors">Urgent</button>
+<button class="flex-1 py-2 font-label-md text-label-md bg-surface border border-outline-variant shadow-sm rounded-md text-on-surface transition-colors">Routine</button>
+<button class="flex-1 py-2 font-label-md text-label-md text-on-surface-variant rounded-md hover:bg-surface-variant transition-colors">Idea</button>
+</div>
+</div>
+<!-- Tags Input -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-sm" for="tags-input">Tags</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sell</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-10 pr-4 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-12" id="tags-input" placeholder="e.g. groceries, home, urgent" type="text"/>
+</div>
+</div>
+<!-- Date Picker & Private Toggle -->
+<div class="flex flex-col md:flex-row gap-md md:gap-lg">
+<!-- Date Picker -->
+<div class="flex-1">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-sm" for="date-input">Due Date (Optional)</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-10 pr-4 font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-12 appearance-none" id="date-input" type="date"/>
+</div>
+</div>
+<!-- Private Toggle -->
+<div class="flex items-center justify-between md:justify-start md:gap-md h-12 md:mt-6 bg-surface-container-lowest md:bg-transparent border md:border-none border-outline-variant rounded-lg px-md md:px-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+<span class="font-label-md text-label-md text-on-surface">Private Note</span>
+</div>
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-surface-variant" role="switch" type="button">
+<span class="sr-only">Toggle Private Note</span>
+<span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-0"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer / Action -->
+<div class="p-md md:p-lg border-t border-outline-variant bg-surface mt-auto">
+<button class="w-full h-12 bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-inverse-surface transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                    Add Note
+                </button>
+</div>
+</div>
+</div>
+</body></html>

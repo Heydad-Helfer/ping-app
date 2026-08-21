@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="he"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Note Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#1b1b1b",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "primary-container": "#1b1b1b",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#c6c6c6",
+                      "surface-dim": "#dadada",
+                      "surface-container": "#eeeeee",
+                      "on-surface": "#1b1b1b",
+                      "tertiary-container": "#1b1b1b",
+                      "on-primary-container": "#848484",
+                      "tertiary-fixed": "#e2e2e2",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e2e2e2",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-container-low": "#f3f3f3",
+                      "primary": "#000000",
+                      "surface-container-high": "#e8e8e8",
+                      "surface-bright": "#f9f9f9",
+                      "tertiary-fixed-dim": "#c6c6c6",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#54647a",
+                      "on-primary-fixed": "#1b1b1b",
+                      "secondary-fixed": "#d3e4fe",
+                      "outline": "#7e7576",
+                      "primary-fixed": "#e2e2e2",
+                      "secondary": "#505f76",
+                      "on-surface-variant": "#4c4546",
+                      "outline-variant": "#cfc4c5",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "on-secondary-fixed": "#0b1c30",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#303030",
+                      "secondary-container": "#d0e1fb",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#474747",
+                      "inverse-primary": "#c6c6c6",
+                      "on-background": "#1b1b1b",
+                      "on-tertiary-container": "#848484",
+                      "surface-tint": "#5e5e5e",
+                      "background": "#f9f9f9",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#000000",
+                      "on-secondary": "#ffffff",
+                      "surface": "#f9f9f9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "safe-bottom": "env(safe-area-inset-bottom, 24px)",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .backdrop-blur { backdrop-filter: blur(8px); }
+        /* Custom scrollbar for textarea */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #cfc4c5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface h-screen w-screen overflow-hidden flex items-center justify-center relative">
+<!-- Mock Background Content (Main Feed) -->
+<div class="absolute inset-0 p-lg overflow-hidden pointer-events-none opacity-50 flex flex-col gap-md">
+<header class="flex justify-between items-center w-full px-md h-12 md:h-16 border-b border-outline-variant bg-surface sticky top-0 z-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Ping</h1>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md p-md mt-16">
+<div class="h-48 border border-outline-variant rounded-lg bg-surface-container-low p-md"></div>
+<div class="h-48 border border-outline-variant rounded-lg bg-surface-container-low p-md"></div>
+<div class="h-48 border border-outline-variant rounded-lg bg-surface-container-low p-md hidden md:block"></div>
+</div>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-primary/40 backdrop-blur z-40 flex items-center justify-center p-md transition-opacity duration-300">
+<!-- Modal Container (Desktop Focused) -->
+<div class="bg-surface w-full max-w-2xl rounded-xl border border-outline-variant flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.05)] transform transition-transform duration-300 scale-100 z-50">
+<!-- Header -->
+<div class="flex items-center justify-between p-md border-b border-outline-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">הוספת פתק חדש</h2>
+<button aria-label="Close" class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+</div>
+<!-- Body -->
+<div class="p-lg flex flex-col gap-lg overflow-y-auto" style="max-height: calc(100vh - 200px);">
+<!-- Textarea -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant sr-only" for="note-content">תוכן הפתק</label>
+<textarea class="w-full min-h-[160px] p-md bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 transition-colors" id="note-content" placeholder="מה על דעתך?"></textarea>
+</div>
+<!-- Priority Segmented Control -->
+<div class="flex flex-col gap-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">עדיפות</span>
+<div class="flex bg-surface-container-low p-xs rounded-lg border border-outline-variant">
+<button class="flex-1 py-2 font-label-md text-label-md rounded-md bg-primary text-on-primary shadow-sm transition-all text-center">
+                            רעיון
+                        </button>
+<button class="flex-1 py-2 font-label-md text-label-md rounded-md text-on-surface hover:bg-surface-container-high transition-all text-center">
+                            שגרתי
+                        </button>
+<button class="flex-1 py-2 font-label-md text-label-md rounded-md text-error hover:bg-error-container hover:text-on-error-container transition-all text-center">
+                            דחוף
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Tags Input -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="tags-input">תגיות</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">label</span>
+<input class="w-full pl-3 pr-10 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/50 transition-colors" id="tags-input" placeholder="למשל: מצרכים, בית, דחוף" type="text"/>
+</div>
+</div>
+<!-- Date Picker -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="date-input">תאריך יעד</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+<input class="w-full pl-3 pr-10 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-sm text-body-sm text-on-surface transition-colors cursor-pointer" id="date-input" style="color-scheme: light;" type="date"/>
+</div>
+</div>
+</div>
+<!-- Private Note Toggle -->
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">lock</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">פתק פרטי</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">גלוי רק לך</span>
+</div>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-[-100%] rtl:peer-checked:after:translate-x-[100%] peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-surface after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Footer / Actions -->
+<div class="p-md border-t border-outline-variant bg-surface-container-lowest rounded-b-xl flex justify-end gap-md">
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">
+                    ביטול
+                </button>
+<button class="px-6 py-3 font-label-md text-label-md bg-primary text-on-primary rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">add</span>
+                    הוסף פתק
+                </button>
+</div>
+</div>
+</div>
+</body></html>

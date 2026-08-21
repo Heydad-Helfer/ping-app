@@ -18,13 +18,13 @@ import {
 	type ThemePreference,
 } from "#/lib/preferences";
 import {
-	getPreferencesForClientNav,
-	setPreferencesForClientNav,
-} from "#/lib/preferences-cache";
-import {
 	setLocalePreferenceServerFn,
 	setThemePreferenceServerFn,
 } from "#/lib/preferences.functions";
+import {
+	getPreferencesForClientNav,
+	setPreferencesForClientNav,
+} from "#/lib/preferences-cache";
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 
