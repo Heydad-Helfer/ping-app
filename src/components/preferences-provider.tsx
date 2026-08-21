@@ -20,7 +20,7 @@ import {
 import {
 	getPreferencesForClientNav,
 	setPreferencesForClientNav,
-} from "#/lib/preferences.client";
+} from "#/lib/preferences-cache";
 import {
 	setLocalePreferenceServerFn,
 	setThemePreferenceServerFn,
