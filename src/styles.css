@@ -334,7 +334,7 @@ html.light {
 
 @utility page-content {
   width: 100%;
-  max-width: 72rem;
+  max-width: 64rem; /* 1024px */
   margin-inline: auto;
 }
 

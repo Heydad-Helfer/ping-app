@@ -101,3 +101,7 @@ tanstackIntent:
     run: "npx @tanstack/intent@latest load dotenv#dotenvx"
     for: "Use dotenvx to run commands with environment variables, manage multiple .env files, expand variables, and encrypt env files for safe commits and CI/CD."
 <!-- intent-skills:end -->
+
+# Styling — RTL / logical properties
+
+Hebrew (`he`) is RTL. Prefer logical CSS / Tailwind utilities (`ps`/`pe`, `ms`/`me`, `start`/`end`, `text-start`/`text-end`, `border-s`/`border-e`) over physical `left`/`right` so layouts mirror correctly when `dir="rtl"`.
