@@ -120,11 +120,36 @@ export const getSessionFn = createServerFn({ method: "GET" }).handler(
 	},
 );
 
+export const getPingFn = createServerFn({ method: "GET" })
+	.validator(z.object({ id: z.uuid() }))
+	.handler(async ({ data }): Promise<PingListItem | null> => {
+		const userId = await requireUserId();
+		const [row] = await db
+			.select()
+			.from(pings)
+			.where(eq(pings.id, data.id))
+			.limit(1);
+
+		if (!row) return null;
+		if (row.isPrivate && row.authorId !== userId) return null;
+
+		const authors = await loadAuthors([row.authorId], userId);
+		const author = authors.get(row.authorId) ?? {
+			id: row.authorId,
+			relation:
+				row.authorId === userId ? ("me" as const) : ("partner" as const),
+			name: null,
+			imageUrl: null,
+			initials: "?",
+		};
+		return toListItem(row, author, userId);
+	});
+
 export const listPingsFn = createServerFn({ method: "GET" })
 	.validator(pingSearchSchema)
 	.handler(async ({ data }): Promise<PingListItem[]> => {
 		const userId = await requireUserId();
-		const filters: PingSearch = data;
+		const { ping: _ping, ...filters }: PingSearch = data;
 
 		const conditions = [
 			filters.private

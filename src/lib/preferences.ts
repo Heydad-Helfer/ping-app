@@ -208,6 +208,9 @@ export const copy = {
 		editorClose: "Close",
 		cardMenu: "Ping actions",
 		actionEdit: "Edit",
+		actionShare: "Share",
+		linkCopied: "Link copied",
+		linkCopyFailed: "Couldn't copy link",
 		actionResolve: "Resolve",
 		actionRestore: "Restore",
 		actionDelete: "Delete",
@@ -215,6 +218,11 @@ export const copy = {
 		duePrefix: "Due",
 		privateBadge: "Private",
 		resolvedBadge: "Done",
+		focusTitle: "Ping",
+		focusUnavailableTitle: "Ping unavailable",
+		focusUnavailableBody:
+			"This ping isn't available. It may be private, deleted, or the link is wrong.",
+		focusClose: "Close",
 	},
 	he: {
 		brand: "Ping",
@@ -272,6 +280,9 @@ export const copy = {
 		editorClose: "סגירה",
 		cardMenu: "פעולות פינג",
 		actionEdit: "עריכה",
+		actionShare: "שיתוף",
+		linkCopied: "הקישור הועתק",
+		linkCopyFailed: "לא ניתן להעתיק את הקישור",
 		actionResolve: "סימון כהושלם",
 		actionRestore: "שחזור",
 		actionDelete: "מחיקה",
@@ -279,6 +290,11 @@ export const copy = {
 		duePrefix: "יעד",
 		privateBadge: "פרטי",
 		resolvedBadge: "הושלם",
+		focusTitle: "פינג",
+		focusUnavailableTitle: "הפינג אינו זמין",
+		focusUnavailableBody:
+			"הפינג הזה אינו זמין. ייתכן שהוא פרטי, נמחק, או שהקישור שגוי.",
+		focusClose: "סגירה",
 	},
 } as const;
 

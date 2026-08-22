@@ -31,9 +31,27 @@ export const pingSearchSchema = z.object({
 	priority: oneOrMany(priorityTokenSchema).optional().catch(undefined),
 	private: trueFlag.catch(undefined),
 	resolved: trueFlag.catch(undefined),
+	/** Focus overlay deep link — not a filter chip. */
+	ping: z.uuid().optional().catch(undefined),
 });
 
 export type PingSearch = z.infer<typeof pingSearchSchema>;
+
+/** Share links carry only the ping id (no filter params). */
+export function pingShareSearch(id: string): Pick<PingSearch, "ping"> {
+	return { ping: id };
+}
+
+export function buildPingShareUrl(id: string, origin: string): string {
+	const url = new URL("/", origin);
+	url.searchParams.set("ping", id);
+	return url.href;
+}
+
+export function omitPingFromSearch(search: PingSearch): PingSearch {
+	const { ping: _ping, ...rest } = search;
+	return rest;
+}
 
 export const pingWriteSchema = z.object({
 	body: z.string().trim().min(1).max(4000),
@@ -65,12 +83,13 @@ export function toggleSearchList(
 	key: "tag" | "priority",
 	token: string,
 ): PingSearch {
-	const current = search[key] ?? [];
+	const base = omitPingFromSearch(search);
+	const current = base[key] ?? [];
 	const next = current.includes(token as never)
 		? current.filter((item) => item !== token)
 		: [...current, token];
 	return {
-		...search,
+		...base,
 		[key]: next.length ? next : undefined,
 	};
 }
@@ -79,9 +98,10 @@ export function toggleSearchFlag(
 	search: PingSearch,
 	key: "private" | "resolved",
 ): PingSearch {
+	const base = omitPingFromSearch(search);
 	return {
-		...search,
-		[key]: search[key] ? undefined : true,
+		...base,
+		[key]: base[key] ? undefined : true,
 	};
 }
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FilterBar } from "#/components/pings/filter-bar";
 import { PingCard } from "#/components/pings/ping-card";
 import { type EditorState, PingEditor } from "#/components/pings/ping-editor";
+import { PingFocus } from "#/components/pings/ping-focus";
 import { usePreferences } from "#/components/preferences-provider";
 import { Button } from "#/components/ui/button";
 import {
@@ -22,9 +23,11 @@ import { t } from "#/lib/preferences";
 
 export function PingQueue({
 	pings,
+	focusedPing,
 	search,
 }: {
 	pings: PingListItem[];
+	focusedPing: PingListItem | null;
 	search: PingSearch;
 }) {
 	const { locale } = usePreferences();
@@ -75,6 +78,12 @@ export function PingQueue({
 					</Button>
 				</div>
 			</div>
+			<PingFocus
+				pingId={search.ping}
+				ping={focusedPing}
+				search={search}
+				onEdit={(next) => setEditor({ open: true, mode: "edit", ping: next })}
+			/>
 			<PingEditor state={editor} onClose={() => setEditor({ open: false })} />
 		</div>
 	);

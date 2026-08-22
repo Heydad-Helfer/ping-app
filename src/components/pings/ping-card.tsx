@@ -6,8 +6,9 @@ import {
 	LightbulbIcon,
 	LockIcon,
 	RotateCcwIcon,
+	ShareIcon,
 } from "lucide-react";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 
 import { usePreferences } from "#/components/preferences-provider";
 import { Avatar, AvatarFallback, AvatarImage } from "#/components/ui/avatar";
@@ -32,18 +33,24 @@ import { priorityLabel, tagLabel } from "#/lib/ping-labels";
 import type { PingListItem } from "#/lib/pings";
 import { deletePingFn, setPingResolvedFn } from "#/lib/pings.functions";
 import { t } from "#/lib/preferences";
+import { sharePingLink } from "#/lib/share-ping";
 import { cn } from "#/lib/utils";
 
 export function PingCard({
 	ping,
 	onEdit,
+	onDeleted,
 }: {
 	ping: PingListItem;
 	onEdit: (ping: PingListItem) => void;
+	onDeleted?: () => void;
 }) {
 	const { locale } = usePreferences();
 	const router = useRouter();
 	const [pending, startTransition] = useTransition();
+	const [shareLabel, setShareLabel] = useState<"share" | "copied" | "failed">(
+		"share",
+	);
 	const setResolved = useServerFn(setPingResolvedFn);
 	const removePing = useServerFn(deletePingFn);
 
@@ -57,6 +64,19 @@ export function PingCard({
 		startTransition(async () => {
 			await action();
 			await router.invalidate();
+		});
+	}
+
+	function share() {
+		startTransition(async () => {
+			const result = await sharePingLink(ping.id, t(locale, "brand"));
+			if (result === "copied") {
+				setShareLabel("copied");
+				window.setTimeout(() => setShareLabel("share"), 2000);
+			} else if (result === "failed") {
+				setShareLabel("failed");
+				window.setTimeout(() => setShareLabel("share"), 2000);
+			}
 		});
 	}
 
@@ -103,6 +123,17 @@ export function PingCard({
 										{t(locale, "actionEdit")}
 									</DropdownMenuItem>
 								) : null}
+								<DropdownMenuItem onClick={share}>
+									<ShareIcon />
+									{t(
+										locale,
+										shareLabel === "copied"
+											? "linkCopied"
+											: shareLabel === "failed"
+												? "linkCopyFailed"
+												: "actionShare",
+									)}
+								</DropdownMenuItem>
 								{ping.canResolve ? (
 									<DropdownMenuItem
 										onClick={() =>
@@ -125,7 +156,10 @@ export function PingCard({
 										variant="destructive"
 										onClick={() => {
 											if (!window.confirm(t(locale, "deleteConfirm"))) return;
-											run(() => removePing({ data: { id: ping.id } }));
+											run(async () => {
+												await removePing({ data: { id: ping.id } });
+												onDeleted?.();
+											});
 										}}
 									>
 										{t(locale, "actionDelete")}
