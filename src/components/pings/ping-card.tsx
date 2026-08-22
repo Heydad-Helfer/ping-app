@@ -67,6 +67,7 @@ export function PingCard({
 			className={cn(
 				"ping-card",
 				ping.priority === "urgent" && "ping-card-urgent",
+				ping.resolved && "ping-card-resolved",
 			)}
 		>
 			<CardHeader className="border-b-0">
@@ -138,11 +139,24 @@ export function PingCard({
 				</CardAction>
 			</CardHeader>
 			<CardContent>
-				<p className="whitespace-pre-wrap text-body-md text-foreground">
+				<p
+					className={cn(
+						"whitespace-pre-wrap text-body-md",
+						ping.resolved
+							? "text-muted-foreground line-through"
+							: "text-foreground",
+					)}
+				>
 					{ping.body}
 				</p>
 			</CardContent>
 			<CardFooter className="flex flex-wrap gap-2">
+				{ping.resolved ? (
+					<Badge variant="secondary">
+						<CheckIcon data-icon="inline-start" />
+						{t(locale, "resolvedBadge")}
+					</Badge>
+				) : null}
 				{ping.isPrivate ? (
 					<Badge variant="secondary">
 						<LockIcon data-icon="inline-start" />

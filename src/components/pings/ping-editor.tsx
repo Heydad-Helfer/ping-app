@@ -4,7 +4,7 @@ import { useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { XIcon } from "lucide-react";
 import { useEffect, useId, useState, useTransition } from "react";
-
+import { TargetDatePicker } from "#/components/pings/target-date-picker";
 import { usePreferences } from "#/components/preferences-provider";
 import { Button } from "#/components/ui/button";
 import { Checkbox } from "#/components/ui/checkbox";
@@ -30,7 +30,6 @@ import {
 	FieldGroup,
 	FieldLabel,
 } from "#/components/ui/field";
-import { Input } from "#/components/ui/input";
 import {
 	Select,
 	SelectContent,
@@ -253,12 +252,10 @@ function PingForm({
 			</Field>
 			<Field>
 				<FieldLabel htmlFor={dateId}>{t(locale, "editorDueDate")}</FieldLabel>
-				<Input
+				<TargetDatePicker
 					id={dateId}
-					type="date"
 					value={targetDate}
-					onChange={(event) => setTargetDate(event.target.value)}
-					className="min-h-touch"
+					onChange={setTargetDate}
 				/>
 			</Field>
 			<Field orientation="horizontal">

@@ -105,3 +105,10 @@ tanstackIntent:
 # Styling — RTL / logical properties
 
 Hebrew (`he`) is RTL. Prefer logical CSS / Tailwind utilities (`ps`/`pe`, `ms`/`me`, `start`/`end`, `text-start`/`text-end`, `border-s`/`border-e`) over physical `left`/`right` so layouts mirror correctly when `dir="rtl"`.
+
+# Lint — Biome and Tailwind CSS
+
+After every code change, check Biome **and** Tailwind CSS diagnostics, then apply the fixes. Do not leave warnings.
+
+- **Biome:** `pnpm check` and editor diagnostics (`ReadLints`). `src/styles.css` is excluded from Biome — still lint it via Tailwind.
+- **Tailwind:** apply `suggestCanonicalClasses` (canonical utilities, e.g. `end-0` → `inset-e-0`, `has-[:focus-visible]` → `has-focus-visible`) and `cssConflict` (do not stack utilities that set the same property, e.g. `min-h-dvh` + `min-h-svh`). Also fix `invalidApply`, `invalidScreen`, and similar Tailwind IntelliSense issues.

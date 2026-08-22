@@ -1,4 +1,11 @@
 {
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**",
+    "**/.svn/**",
+    "**/.cursor/**"
+  ],
   "files.watcherExclude": {
     "**/routeTree.gen.ts": true
   },

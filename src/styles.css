@@ -350,7 +350,7 @@ html.light {
 }
 
 @utility app-layout {
-  @apply relative flex min-h-dvh min-h-svh flex-col;
+  @apply relative flex min-h-dvh flex-col;
 }
 
 @utility app-layout-content {
@@ -432,8 +432,12 @@ html.light {
   @apply border-s-4 border-s-urgent-red;
 }
 
+@utility ping-card-resolved {
+  @apply opacity-70;
+}
+
 @utility filter-bar {
-  @apply -mx-page flex gap-2 overflow-x-auto px-page pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  @apply -mx-page flex gap-2 overflow-x-auto px-page pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden;
 }
 
 @utility filter-chip {
@@ -473,7 +477,7 @@ html.light {
 }
 
 @utility access-gate-lock {
-  @apply absolute end-0 bottom-0 flex size-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground [&_svg]:size-4;
+  @apply absolute inset-e-0 bottom-0 flex size-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground [&_svg]:size-4;
 }
 
 @utility app-grid {

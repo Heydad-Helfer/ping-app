@@ -1,0 +1,25 @@
+---
+description: Always check Biome and Tailwind CSS diagnostics and apply the fixes
+alwaysApply: true
+---
+
+# Lint — Biome and Tailwind CSS
+
+After every code change, check Biome **and** Tailwind CSS diagnostics, then apply the fixes. Do not leave warnings.
+
+- **Biome:** run `pnpm check` and read editor diagnostics. `src/styles.css` is excluded from Biome — still lint it via Tailwind.
+- **Tailwind IntelliSense:** fix `suggestCanonicalClasses` and `cssConflict`, plus `invalidApply` / `invalidScreen` / similar issues.
+
+```tsx
+// ❌ cssConflict — both set min-height; last class wins
+<div className="min-h-dvh min-h-svh" />
+
+// ✅ one utility
+<div className="min-h-dvh" />
+
+// ❌ non-canonical
+<div className="absolute end-0 has-[:focus-visible]:ring-3" />
+
+// ✅ canonical
+<div className="absolute inset-e-0 has-focus-visible:ring-3" />
+```

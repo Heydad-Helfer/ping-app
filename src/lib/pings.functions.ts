@@ -1,11 +1,12 @@
 import { auth, clerkClient } from "@clerk/tanstack-react-start/server";
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseStatus } from "@tanstack/react-start/server";
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, gt, gte, inArray, or, sql } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "#/db";
 import { pings } from "#/db/schema";
+import { utcDateString } from "#/lib/dates";
 import {
 	isPriorityToken,
 	type PingListItem,
@@ -32,6 +33,18 @@ function canResolvePing(
 ) {
 	if (ping.isPrivate) return ping.authorId === userId;
 	return true;
+}
+
+const COMPLETED_VISIBLE_MS = 24 * 60 * 60 * 1000;
+
+function defaultFeedVisibility(now = new Date()) {
+	const todayUtc = utcDateString(now);
+	const completedSince = new Date(now.getTime() - COMPLETED_VISIBLE_MS);
+	return or(
+		eq(pings.resolved, false),
+		gt(pings.targetDate, todayUtc),
+		gte(pings.completedAt, completedSince),
+	);
 }
 
 async function loadAuthors(
@@ -90,6 +103,7 @@ function toListItem(
 		tags: parseTagTokens(row.tags),
 		targetDate: row.targetDate,
 		resolved: row.resolved,
+		completedAt: row.completedAt?.toISOString() ?? null,
 		createdAt: row.createdAt.toISOString(),
 		updatedAt: row.updatedAt.toISOString(),
 		author,
@@ -116,7 +130,7 @@ export const listPingsFn = createServerFn({ method: "GET" })
 			filters.private
 				? and(eq(pings.isPrivate, true), eq(pings.authorId, userId))
 				: sql`(${pings.isPrivate} = false OR ${pings.authorId} = ${userId})`,
-			eq(pings.resolved, Boolean(filters.resolved)),
+			filters.resolved ? eq(pings.resolved, true) : defaultFeedVisibility(),
 		];
 
 		if (filters.priority?.length) {
@@ -246,11 +260,13 @@ export const setPingResolvedFn = createServerFn({ method: "POST" })
 			throw new Error("Forbidden");
 		}
 
+		const now = new Date();
 		await db
 			.update(pings)
 			.set({
 				resolved: data.resolved,
-				updatedAt: new Date(),
+				completedAt: data.resolved ? now : null,
+				updatedAt: now,
 			})
 			.where(eq(pings.id, data.id));
 

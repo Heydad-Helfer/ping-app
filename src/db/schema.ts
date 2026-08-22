@@ -20,6 +20,10 @@ export const pings = pgTable(
 		tags: text("tags").array().notNull().default(sql`'{}'::text[]`),
 		targetDate: date("target_date", { mode: "string" }),
 		resolved: boolean("resolved").notNull().default(false),
+		completedAt: timestamp("completed_at", {
+			withTimezone: true,
+			mode: "date",
+		}),
 		createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
 			.notNull()
 			.defaultNow(),

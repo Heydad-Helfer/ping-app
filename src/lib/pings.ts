@@ -110,6 +110,7 @@ export type PingListItem = {
 	tags: TagToken[];
 	targetDate: string | null;
 	resolved: boolean;
+	completedAt: string | null;
 	createdAt: string;
 	updatedAt: string;
 	author: PingAuthor;
