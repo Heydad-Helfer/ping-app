@@ -130,8 +130,8 @@
     oklch(0.585 0.204 277.117 / 0.15)
   );
   --nav-surface: light-dark(
-    oklch(0.981 0.003 247.858 / 0.8),
-    oklch(0.19 0.041 265.486 / 0.7)
+    oklch(0.981 0.003 247.858 / 0.94),
+    oklch(0.19 0.041 265.486 / 0.94)
   );
 
   --radius: 0.5rem;
@@ -141,8 +141,8 @@
   --nav-blur: 12px;
 
   /* Drop files in /public/backgrounds, then: url("/backgrounds/light.webp") */
-  --app-background-image-light: none;
-  --app-background-image-dark: none;
+  --app-background-image-light: url("/backgrounds/wave-light.png");
+  --app-background-image-dark: url("/backgrounds/wave-dark.png");
   --app-background-image: var(--app-background-image-light);
 }
 
@@ -332,6 +332,11 @@ html.light {
     max(var(--page-margin), env(safe-area-inset-right));
 }
 
+@utility page-inline {
+  padding-inline: max(var(--page-margin), env(safe-area-inset-left))
+    max(var(--page-margin), env(safe-area-inset-right));
+}
+
 @utility page-content {
   width: 100%;
   max-width: 64rem; /* 1024px */
@@ -345,11 +350,11 @@ html.light {
 }
 
 @utility app-layout {
-  @apply page-shell flex flex-col gap-gutter;
+  @apply relative flex min-h-dvh min-h-svh flex-col;
 }
 
 @utility app-layout-content {
-  @apply page-content flex min-h-0 flex-1 flex-col gap-gutter;
+  @apply page-content page-inline relative z-10 flex min-h-0 flex-1 flex-col gap-gutter pt-gutter pb-[max(var(--page-margin),env(safe-area-inset-bottom))];
 }
 
 @utility app-main {
@@ -357,11 +362,11 @@ html.light {
 }
 
 @utility app-header {
-  @apply surface-glass sticky top-0 z-40 border-b border-outline-variant/40;
+  @apply surface-glass sticky top-0 z-40 w-full border-b border-outline-variant/40 pt-[env(safe-area-inset-top)];
 }
 
 @utility app-header-bar {
-  @apply flex h-14 items-center gap-3;
+  @apply page-content page-inline flex h-14 items-center gap-3;
 }
 
 @utility app-header-brand {
@@ -389,7 +394,7 @@ html.light {
 }
 
 @utility app-header-actions {
-  @apply ms-auto flex shrink-0 items-center gap-1 sm:ms-0;
+  @apply ms-auto flex shrink-0 items-center gap-1;
 }
 
 @utility home-section {
@@ -406,6 +411,69 @@ html.light {
 
 @utility home-placeholder {
   @apply text-body-sm text-muted-foreground;
+}
+
+@utility ping-queue {
+  @apply relative flex flex-1 flex-col gap-gutter pb-24;
+}
+
+@utility ping-list {
+  @apply m-0 flex list-none flex-col gap-gutter p-0;
+}
+
+@utility ping-fab {
+  position: fixed;
+  z-index: 30;
+  inset-inline-end: max(var(--page-margin), env(safe-area-inset-right), env(safe-area-inset-left));
+  bottom: max(var(--page-margin), env(safe-area-inset-bottom));
+}
+
+@utility ping-card-urgent {
+  @apply border-s-4 border-s-urgent-red;
+}
+
+@utility filter-bar {
+  @apply -mx-page flex gap-2 overflow-x-auto px-page pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+@utility filter-chip {
+  @apply inline-flex h-touch shrink-0 items-center rounded-full border border-border bg-card px-4 text-label-md text-muted-foreground no-underline transition-colors;
+}
+
+@utility filter-chip-active {
+  @apply border-primary bg-chip-indigo text-primary;
+}
+
+@utility filter-chip-active-urgent {
+  @apply border-urgent-red bg-chip-rose text-urgent-red;
+}
+
+@utility filter-chip-active-idea {
+  @apply border-idea-blue bg-chip-sky text-idea-blue;
+}
+
+@utility filter-chip-active-routine {
+  @apply border-routine-gray bg-chip-muted text-routine-gray;
+}
+
+@utility access-gate {
+  @apply flex flex-1 flex-col items-center justify-center py-12;
+}
+
+@utility access-gate-card {
+  @apply surface-glass flex w-full max-w-md flex-col items-center gap-4 rounded-2xl border border-outline-variant/50 p-8 text-center shadow-elevated;
+}
+
+@utility access-gate-mark {
+  @apply relative size-24;
+}
+
+@utility access-gate-icon {
+  @apply size-24 rounded-2xl;
+}
+
+@utility access-gate-lock {
+  @apply absolute end-0 bottom-0 flex size-8 items-center justify-center rounded-full bg-destructive text-destructive-foreground [&_svg]:size-4;
 }
 
 @utility app-grid {
@@ -453,10 +521,35 @@ html.light {
     z-index: -1;
     pointer-events: none;
     background-color: var(--background);
+  }
+
+  .app-layout::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: calc(3.5rem + env(safe-area-inset-top));
+    height: min(22rem, 42vh);
+    z-index: 0;
+    pointer-events: none;
     background-image: var(--app-background-image);
-    background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
+    background-position: center top;
+    background-size: min(64rem, 100%) auto;
+    opacity: 0.28;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 16%,
+      black 58%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 16%,
+      black 58%,
+      transparent 100%
+    );
   }
 
   h1,

@@ -1,0 +1,187 @@
+"use client";
+
+import { useRouter } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import {
+	CheckIcon,
+	EllipsisIcon,
+	LightbulbIcon,
+	LockIcon,
+	RotateCcwIcon,
+} from "lucide-react";
+import { useTransition } from "react";
+
+import { usePreferences } from "#/components/preferences-provider";
+import { Avatar, AvatarFallback, AvatarImage } from "#/components/ui/avatar";
+import { Badge } from "#/components/ui/badge";
+import { Button } from "#/components/ui/button";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardFooter,
+	CardHeader,
+} from "#/components/ui/card";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "#/components/ui/dropdown-menu";
+import { formatPingDate, formatRelativeCreated } from "#/lib/dates";
+import { priorityLabel, tagLabel } from "#/lib/ping-labels";
+import type { PingListItem } from "#/lib/pings";
+import { deletePingFn, setPingResolvedFn } from "#/lib/pings.functions";
+import { t } from "#/lib/preferences";
+import { cn } from "#/lib/utils";
+
+export function PingCard({
+	ping,
+	onEdit,
+}: {
+	ping: PingListItem;
+	onEdit: (ping: PingListItem) => void;
+}) {
+	const { locale } = usePreferences();
+	const router = useRouter();
+	const [pending, startTransition] = useTransition();
+	const setResolved = useServerFn(setPingResolvedFn);
+	const removePing = useServerFn(deletePingFn);
+
+	const authorLabel =
+		ping.author.relation === "me"
+			? t(locale, "authorMe")
+			: t(locale, "authorPartner");
+	const createdLabel = formatRelativeCreated(ping.createdAt, locale);
+
+	function run(action: () => Promise<unknown>) {
+		startTransition(async () => {
+			await action();
+			await router.invalidate();
+		});
+	}
+
+	return (
+		<Card
+			className={cn(
+				"ping-card",
+				ping.priority === "urgent" && "ping-card-urgent",
+			)}
+		>
+			<CardHeader className="border-b-0">
+				<div className="flex min-w-0 items-center gap-2">
+					<Avatar size="sm">
+						{ping.author.imageUrl ? (
+							<AvatarImage src={ping.author.imageUrl} alt="" />
+						) : null}
+						<AvatarFallback>{ping.author.initials}</AvatarFallback>
+					</Avatar>
+					<p className="truncate text-label-md text-muted-foreground">
+						{authorLabel}
+						{createdLabel ? ` · ${createdLabel}` : null}
+					</p>
+				</div>
+				<CardAction className="flex items-center gap-1">
+					<PriorityBadge priority={ping.priority} locale={locale} />
+					<DropdownMenu>
+						<DropdownMenuTrigger
+							render={
+								<Button
+									variant="ghost"
+									size="icon"
+									aria-label={t(locale, "cardMenu")}
+									disabled={pending}
+								/>
+							}
+						>
+							<EllipsisIcon />
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end" className="min-w-40">
+							<DropdownMenuGroup>
+								{ping.canEdit ? (
+									<DropdownMenuItem onClick={() => onEdit(ping)}>
+										{t(locale, "actionEdit")}
+									</DropdownMenuItem>
+								) : null}
+								{ping.canResolve ? (
+									<DropdownMenuItem
+										onClick={() =>
+											run(() =>
+												setResolved({
+													data: { id: ping.id, resolved: !ping.resolved },
+												}),
+											)
+										}
+									>
+										{ping.resolved ? <RotateCcwIcon /> : <CheckIcon />}
+										{t(
+											locale,
+											ping.resolved ? "actionRestore" : "actionResolve",
+										)}
+									</DropdownMenuItem>
+								) : null}
+								{ping.canDelete ? (
+									<DropdownMenuItem
+										variant="destructive"
+										onClick={() => {
+											if (!window.confirm(t(locale, "deleteConfirm"))) return;
+											run(() => removePing({ data: { id: ping.id } }));
+										}}
+									>
+										{t(locale, "actionDelete")}
+									</DropdownMenuItem>
+								) : null}
+							</DropdownMenuGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				</CardAction>
+			</CardHeader>
+			<CardContent>
+				<p className="whitespace-pre-wrap text-body-md text-foreground">
+					{ping.body}
+				</p>
+			</CardContent>
+			<CardFooter className="flex flex-wrap gap-2">
+				{ping.isPrivate ? (
+					<Badge variant="secondary">
+						<LockIcon data-icon="inline-start" />
+						{t(locale, "privateBadge")}
+					</Badge>
+				) : null}
+				{ping.tags.map((token) => (
+					<Badge key={token} variant="outline">
+						{tagLabel(locale, token)}
+					</Badge>
+				))}
+				{ping.targetDate ? (
+					<Badge variant="outline">
+						{t(locale, "duePrefix")} {formatPingDate(ping.targetDate, locale)}
+					</Badge>
+				) : null}
+			</CardFooter>
+		</Card>
+	);
+}
+
+function PriorityBadge({
+	priority,
+	locale,
+}: {
+	priority: PingListItem["priority"];
+	locale: Parameters<typeof t>[0];
+}) {
+	return (
+		<Badge
+			variant="secondary"
+			className={cn(
+				priority === "urgent" && "bg-chip-rose text-urgent-red",
+				priority === "idea" && "bg-chip-sky text-idea-blue",
+				priority === "routine" && "bg-chip-muted text-routine-gray",
+			)}
+		>
+			{priority === "idea" ? <LightbulbIcon data-icon="inline-start" /> : null}
+			{priorityLabel(locale, priority)}
+		</Badge>
+	);
+}

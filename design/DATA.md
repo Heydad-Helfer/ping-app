@@ -1,17 +1,19 @@
 **"Ping" model**
 * A "Ping" is the main entity in the system.
-* A "Ping" represents a message / note / reminder / idea that a user sketches, and may want to share with the others.
+* A "Ping" represents a message / note / reminder / idea that a user sketches, and may want to share with the other person.
+* v1 is a **single implicit household**: the whole app is the couple's queue. There is no households table. Auth is Clerk; restrict who can sign up in the Clerk dashboard. See [V1.md](V1.md).
 * Each "Ping" is created by a user (user id comes from Clerk)
 * Each "Ping" has a UUIDv7 id
-* A "Ping" can be either private, or not (i.e. Boolean field that indicates if the other users can see the ping)
-* A "Ping" can have 0 or more tags (topics) to later filter by (like "work", "groceries", etc.). The list of tags is static in the code, the DB should hold only tokens that represents the tag. This might change in the future to support dynamic tags, but requires multi-language support.
-* A "Ping" can have priority (Urgent, Idea, Routine). The list of priorities is static in the code, the DB should hold only the token that represents the priority. This might change in the future to support dynamic priorities, but requires multi-language support.
-* A "Ping" has a lifecycle. It can have a targetDate, and (regardless) it can be resolved (Boolean. Determins if the ping is displayed or not by default.)
+* A "Ping" can be either private, or not (i.e. Boolean field that indicates if the other user can see the ping)
+* A "Ping" can have 0 or more tags (topics) to later filter by. The list of tags is static in the code (`groceries`, `home`, `medical`, `work`, `travel`); the DB holds only tokens. Dynamic / user-authored tags are out of v1 (they need multi-language support).
+* A "Ping" can have priority (`urgent`, `idea`, `routine`). Static tokens in code; DB holds the token.
+* A "Ping" has a lifecycle. It can have a `target_date` (date only, no time), and (regardless) it can be resolved (Boolean. Determines if the ping is displayed by default.)
 * The content of a Ping is a text area. Currently it'll be plain, but we might change it in the future.
-* A Ping will also have a createdAt timestamp.
+* A Ping has `created_at` and `updated_at` timestamps (timestamptz, UTC).
 
 **Assumptions**
-* All dates are in saved in UTC. Frontend will convert for the user's locale with Temporal API.
-* The app is pure SSR, so a server function will handle all the querying and filtering.
+* `target_date` is a calendar date, not a UTC instant. `created_at` / `updated_at` are UTC. The server formats dates with `Intl` using the app locale.
+* The app is pure SSR for the feed, so a server function will handle all querying and filtering.
 * Filters will be requested as part of the query parameters (`/?tag=medical&priority=urgent`)
-* Filters of different types will have "AND" relation, while filters of the same type will have an "OR" relation (example: `tag = medical OR tag = groceries`. `tag = medical AND priority = urgent`)
+* Filters of different types will have "AND" relation, while filters of the same type will have "OR" relation (example: `tag = medical OR tag = groceries`. `tag = medical AND priority = urgent`)
+* Default feed: shared pings + the viewer's private pings, unresolved only. `private=1` = my private only. `resolved=1` = resolved only.

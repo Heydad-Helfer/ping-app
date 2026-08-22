@@ -1,18 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { usePreferences } from "#/components/preferences-provider";
-import { t } from "#/lib/preferences";
+import { AccessRestricted } from "#/components/pings/access-restricted";
+import { PingQueue } from "#/components/pings/ping-queue";
+import { pingSearchSchema } from "#/lib/pings";
+import { getSessionFn, listPingsFn } from "#/lib/pings.functions";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+	validateSearch: pingSearchSchema,
+	loaderDeps: ({ search }) => search,
+	beforeLoad: async () => {
+		const session = await getSessionFn();
+		return { session };
+	},
+	loader: async ({ context, deps }) => {
+		if (!context.session.userId) {
+			return { signedIn: false as const, pings: [] };
+		}
+		const pings = await listPingsFn({ data: deps });
+		return { signedIn: true as const, pings };
+	},
+	component: Home,
+});
 
 function Home() {
-	const { locale } = usePreferences();
+	const data = Route.useLoaderData();
+	const search = Route.useSearch();
 
-	return (
-		<section className="home-section">
-			<h1 className="home-title">{t(locale, "homeTitle")}</h1>
-			<p className="home-body">{t(locale, "homeBody")}</p>
-			<p className="home-placeholder">{t(locale, "homePlaceholder")}</p>
-		</section>
-	);
+	if (!data.signedIn) {
+		return <AccessRestricted />;
+	}
+
+	return <PingQueue pings={data.pings} search={search} />;
 }

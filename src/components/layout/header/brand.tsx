@@ -7,7 +7,7 @@ export function HeaderBrand() {
 	const { locale } = usePreferences();
 
 	return (
-		<Link to="/" className="app-header-brand">
+		<Link to="/" search={{}} className="app-header-brand">
 			<img
 				src="/favicon-32x32.png"
 				alt=""

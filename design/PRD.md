@@ -1,5 +1,7 @@
 **Role & Project:**
-Design a minimalist, mobile-first Progressive Web App (PWA) called "Ping". It is a private, two-player household note and task queue (used by a couple). The UI should feel like a native iOS/Android utility app, not a traditional website. 
+Design a minimalist, mobile-first Progressive Web App (PWA) called "Ping". It is a private, two-player household note and task queue (used by a couple). The UI should feel like a native iOS/Android utility app, not a traditional website.
+
+**v1 lock:** [V1.md](V1.md) is the build contract (fields, household, permissions, filters). Sketches in this folder are visual inspiration; do not implement Search / Notifications / Settings, images, or checklists in v1. 
 
 **Dualities to Address (CRITICAL):**
 1. **Language & Direction (He/Eng):** The design must support both English (LTR) and Hebrew (RTL). Layouts must use logical properties (start/end instead of left/right) so the entire UI mirrors perfectly when the language flips. 
