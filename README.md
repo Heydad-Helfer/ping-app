@@ -66,7 +66,19 @@ For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tu
    CLERK_SECRET_KEY=sk_test_...
    ```
 
-3. Start the app and visit `/demo/clerk`.
+3. Start the app and visit `/`.
+
+### Development dummy account
+
+This Clerk instance signs in with **username** (email identifiers are off). Google accounts work; the dummy has no Google and no real mailbox.
+
+| | |
+| --- | --- |
+| Username | `dummy` |
+| Password | `PingDummy-dev2` |
+| Display name | Dummy Dev |
+
+Use the username field in the Clerk modal, not an email.
 
 ### What's wired up
 

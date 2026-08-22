@@ -136,6 +136,7 @@
 
   --radius: 0.5rem;
   --page-margin: 1rem;
+  --page-max: 64rem; /* 1024px — feed column, FAB slot */
   --page-gutter: 0.75rem;
   --touch: 3rem;
   --nav-blur: 12px;
@@ -339,7 +340,7 @@ html.light {
 
 @utility page-content {
   width: 100%;
-  max-width: 64rem; /* 1024px */
+  max-width: var(--page-max);
   margin-inline: auto;
 }
 
@@ -397,6 +398,17 @@ html.light {
   @apply ms-auto flex shrink-0 items-center gap-1;
 }
 
+/* Visible only when installed (no browser refresh chrome). */
+@utility header-refresh {
+  display: none;
+
+  @media (display-mode: standalone),
+    (display-mode: fullscreen),
+    (display-mode: window-controls-overlay) {
+    display: contents;
+  }
+}
+
 @utility home-section {
   @apply flex flex-1 flex-col justify-center gap-4 py-8;
 }
@@ -421,10 +433,25 @@ html.light {
   @apply m-0 flex list-none flex-col gap-gutter p-0;
 }
 
-@utility ping-fab {
+@utility ping-fab-slot {
+  pointer-events: none;
   position: fixed;
+  inset: 0;
   z-index: 30;
-  inset-inline-end: max(var(--page-margin), env(safe-area-inset-right), env(safe-area-inset-left));
+}
+
+@utility ping-fab-slot-inner {
+  @apply page-content relative h-full;
+}
+
+@utility ping-fab {
+  pointer-events: auto;
+  position: absolute;
+  inset-inline-end: max(
+    var(--page-margin),
+    env(safe-area-inset-right),
+    env(safe-area-inset-left)
+  );
   bottom: max(var(--page-margin), env(safe-area-inset-bottom));
 }
 
@@ -537,8 +564,8 @@ html.light {
     pointer-events: none;
     background-image: var(--app-background-image);
     background-repeat: no-repeat;
-    background-position: center top;
-    background-size: min(64rem, 100%) auto;
+    background-position: center;
+    background-size: cover;
     opacity: 0.28;
     mask-image: linear-gradient(
       to bottom,
@@ -554,6 +581,13 @@ html.light {
       black 58%,
       transparent 100%
     );
+  }
+
+  @media (min-width: 64rem) {
+    .app-layout::before {
+      height: min(32rem, 48vh);
+      opacity: 0.34;
+    }
   }
 
   h1,

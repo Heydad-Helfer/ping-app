@@ -1,5 +1,3 @@
-"use client";
-
 import { InboxIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -64,15 +62,19 @@ export function PingQueue({
 					))}
 				</ul>
 			)}
-			<Button
-				variant="fab"
-				size="fab"
-				className="ping-fab"
-				aria-label={t(locale, "fabLabel")}
-				onClick={() => setEditor({ open: true, mode: "create" })}
-			>
-				<PlusIcon />
-			</Button>
+			<div className="ping-fab-slot">
+				<div className="ping-fab-slot-inner">
+					<Button
+						variant="fab"
+						size="fab"
+						className="ping-fab"
+						aria-label={t(locale, "fabLabel")}
+						onClick={() => setEditor({ open: true, mode: "create" })}
+					>
+						<PlusIcon />
+					</Button>
+				</div>
+			</div>
 			<PingEditor state={editor} onClose={() => setEditor({ open: false })} />
 		</div>
 	);

@@ -1,5 +1,3 @@
-"use client";
-
 import { Show, UserButton } from "@clerk/tanstack-react-start";
 
 import { SignInOnlyButton } from "#/integrations/clerk/sign-in-only-button";

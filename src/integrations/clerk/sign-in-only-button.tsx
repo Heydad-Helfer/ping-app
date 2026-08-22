@@ -1,5 +1,3 @@
-"use client";
-
 import { SignInButton } from "@clerk/tanstack-react-start";
 import { LogInIcon } from "lucide-react";
 import type { ReactNode } from "react";

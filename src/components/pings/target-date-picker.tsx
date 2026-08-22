@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import { enGB, he } from "react-day-picker/locale";

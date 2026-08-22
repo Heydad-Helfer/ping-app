@@ -1,5 +1,3 @@
-"use client";
-
 import { LockIcon, LogInIcon } from "lucide-react";
 
 import { usePreferences } from "#/components/preferences-provider";
