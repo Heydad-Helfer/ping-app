@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AccessRestricted } from "#/components/pings/access-restricted";
 import { PingQueue } from "#/components/pings/ping-queue";
 import { pingSearchSchema } from "#/lib/pings";
-import { getSessionFn, listPingsFn } from "#/lib/pings.functions";
+import { getPingFn, getSessionFn, listPingsFn } from "#/lib/pings.functions";
 
 export const Route = createFileRoute("/")({
 	validateSearch: pingSearchSchema,
@@ -14,10 +14,13 @@ export const Route = createFileRoute("/")({
 	},
 	loader: async ({ context, deps }) => {
 		if (!context.session.userId) {
-			return { signedIn: false as const, pings: [] };
+			return { signedIn: false as const, pings: [], focusedPing: null };
 		}
 		const pings = await listPingsFn({ data: deps });
-		return { signedIn: true as const, pings };
+		const focusedPing = deps.ping
+			? await getPingFn({ data: { id: deps.ping } })
+			: null;
+		return { signedIn: true as const, pings, focusedPing };
 	},
 	component: Home,
 });
@@ -30,5 +33,11 @@ function Home() {
 		return <AccessRestricted />;
 	}
 
-	return <PingQueue pings={data.pings} search={search} />;
+	return (
+		<PingQueue
+			pings={data.pings}
+			focusedPing={data.focusedPing}
+			search={search}
+		/>
+	);
 }

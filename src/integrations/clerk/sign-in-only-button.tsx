@@ -1,4 +1,5 @@
 import { SignInButton } from "@clerk/tanstack-react-start";
+import { useRouterState } from "@tanstack/react-router";
 import { LogInIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -14,9 +15,12 @@ export function SignInOnlyButton({
 	variant?: "ghost" | "default";
 }) {
 	const { locale } = usePreferences();
+	const returnUrl = useRouterState({
+		select: (state) => state.location.href,
+	});
 
 	return (
-		<SignInButton mode="modal" forceRedirectUrl="/" withSignUp={false}>
+		<SignInButton mode="modal" forceRedirectUrl={returnUrl} withSignUp={false}>
 			{children ?? (
 				<Button variant={variant}>
 					<LogInIcon data-icon="inline-start" />

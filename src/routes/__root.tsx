@@ -60,6 +60,37 @@ export const Route = createRootRoute({
 				{
 					title: "Ping",
 				},
+				{
+					name: "description",
+					content:
+						"A private space for the two of you — notes, ideas, and reminders.",
+				},
+				{
+					property: "og:title",
+					content: "Ping",
+				},
+				{
+					property: "og:description",
+					content:
+						"A private space for the two of you — notes, ideas, and reminders.",
+				},
+				{
+					property: "og:type",
+					content: "website",
+				},
+				{
+					name: "twitter:card",
+					content: "summary",
+				},
+				{
+					name: "twitter:title",
+					content: "Ping",
+				},
+				{
+					name: "twitter:description",
+					content:
+						"A private space for the two of you — notes, ideas, and reminders.",
+				},
 			],
 			links: [
 				{
