@@ -430,7 +430,15 @@ html.light {
 }
 
 @utility ping-list {
-  @apply m-0 flex list-none flex-col gap-gutter p-0;
+  @apply m-0 grid list-none grid-cols-1 items-start gap-gutter p-0;
+
+  & > li {
+    min-width: 0;
+  }
+
+  @media (min-width: 48rem) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @utility ping-fab-slot {
